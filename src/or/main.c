@@ -2932,24 +2932,6 @@ static struct {
   int try_to_register;
   struct event *signal_event;
 } signal_handlers[] = {
-#ifdef SIGINT
-  { SIGINT, UNIX_ONLY, NULL }, /* do a controlled slow shutdown */
-#endif
-#ifdef SIGTERM
-  { SIGTERM, UNIX_ONLY, NULL }, /* to terminate now */
-#endif
-#ifdef SIGPIPE
-  { SIGPIPE, UNIX_ONLY, NULL }, /* otherwise SIGPIPE kills us */
-#endif
-#ifdef SIGUSR1
-  { SIGUSR1, UNIX_ONLY, NULL }, /* dump stats */
-#endif
-#ifdef SIGUSR2
-  { SIGUSR2, UNIX_ONLY, NULL }, /* go to loglevel debug */
-#endif
-#ifdef SIGHUP
-  { SIGHUP, UNIX_ONLY, NULL }, /* to reload config, retry conns, etc */
-#endif
 #ifdef SIGXFSZ
   { SIGXFSZ, UNIX_ONLY, NULL }, /* handle file-too-big resource exhaustion */
 #endif
