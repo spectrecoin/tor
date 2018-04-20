@@ -13,9 +13,9 @@
 
 #include "orconfig.h"
 
-#ifdef HAVE_STDINT_H
+//#ifdef HAVE_STDINT_H
 #include <stdint.h>
-#endif
+//#endif
 #ifdef HAVE_SYS_TYPES_H
 #include <sys/types.h>
 #endif
