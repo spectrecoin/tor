@@ -2,6 +2,7 @@
 #include <limits.h>
 #ifdef _MSC_VER
 #include <intrin.h>     /* _BitScanForward, _BitScanReverse */
+#include <Windows.h>
 #endif
 
 /* First define ctz and clz functions; these are compiler-dependent if

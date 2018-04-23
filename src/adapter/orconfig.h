@@ -13,8 +13,6 @@ const char tor_git_revision[] =
 #endif
   "";
  */
-
-
 #if defined(_WIN32)
 #  include "orconfig_win32.h"
 #elif defined(__darwin__) || defined(__APPLE__)

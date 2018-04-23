@@ -8,6 +8,12 @@
 #include <stdint.h>
 #include "trunnel.h"
 
+#if defined(_MSC_VER)
+#include <BaseTsd.h>
+typedef SSIZE_T ssize_t;
+#endif
+
+
 #if !defined(TRUNNEL_OPAQUE) && !defined(TRUNNEL_OPAQUE_TRN_CELL_EXTENSION_FIELDS)
 struct trn_cell_extension_fields_st {
   uint8_t field_type;
@@ -40,6 +46,7 @@ void trn_cell_extension_fields_free(trn_cell_extension_fields_t *victim);
  * if the input appears truncated, and -1 if the input is otherwise
  * invalid.
  */
+
 ssize_t trn_cell_extension_fields_parse(trn_cell_extension_fields_t **output, const uint8_t *input, const size_t len_in);
 /** Return the number of bytes we expect to need to encode the
  * trn_cell_extension_fields in 'obj'. On failure, return a negative
