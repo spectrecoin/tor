@@ -23,111 +23,51 @@
 #common.depends = trunnel
 
 #  CONFIG += ordered
+#Command to install dependencies
+#vcpkg.exe install boost:x64-windows-static berkeleydb:x64-windows-static leveldb:x64-windows-static libevent:x64-windows-static lua:x64-windows-static openssl:x64-windows-static zlib:x64-windows-static
 DEFINES += BOOST_ASIO_ENABLE_OLD_SERVICES BOOST_SPIRIT_THREADSAFE BOOST_THREAD_USE_LIB
 
-#INCLUDEPATH += C:/Users/Shbli/Workspace/packages/boost-core_x86-windows/include
-#INCLUDEPATH += C:/Users/Shbli/Workspace/packages/boost-config_x86-windows/include
-#INCLUDEPATH += C:/Users/Shbli/Workspace/packages/boost-type-traits_x86-windows/include
-#INCLUDEPATH += C:/Users/Shbli/Workspace/packages/boost-predef_x86-windows/include
-#INCLUDEPATH += C:/Users/Shbli/Workspace/packages/boost-assert_x86-windows/include
-INCLUDEPATH += C:/Users/Shbli/Workspace/packages/boostinclude/include
-
-LIBS += -LC:/Users/Shbli/Workspace/packages/lua_x86-windows/lib/ -llua
-
-INCLUDEPATH += C:/Users/Shbli/Workspace/packages/lua_x86-windows/include
-DEPENDPATH += C:/Users/Shbli/Workspace/packages/lua_x86-windows/include
-
-PRE_TARGETDEPS += C:/Users/Shbli/Workspace/packages/lua_x86-windows/lib/lua.lib
-
-LIBS += -LC:/Users/Shbli/Workspace/packages/boost-chrono_x86-windows/lib/ -lboost_chrono-vc140-mt
-
-INCLUDEPATH += C:/Users/Shbli/Workspace/packages/boost-chrono_x86-windows/include
-DEPENDPATH += C:/Users/Shbli/Workspace/packages/boost-chrono_x86-windows/include
-
-PRE_TARGETDEPS += C:/Users/Shbli/Workspace/packages/boost-chrono_x86-windows/lib/boost_chrono-vc140-mt.lib
-
-LIBS += -LC:/Users/Shbli/Workspace/packages/boost-filesystem_x86-windows/lib/ -lboost_filesystem-vc140-mt
-
-INCLUDEPATH += C:/Users/Shbli/Workspace/packages/boost-filesystem_x86-windows/include
-DEPENDPATH += C:/Users/Shbli/Workspace/packages/boost-filesystem_x86-windows/include
-
-PRE_TARGETDEPS += C:/Users/Shbli/Workspace/packages/boost-filesystem_x86-windows/lib/boost_filesystem-vc140-mt.lib
 
 
-LIBS += -LC:/Users/Shbli/Workspace/packages/boost-program-options_x86-windows/lib/ -lboost_program_options-vc140-mt
+INCLUDEPATH += $$PWD/../packages64bit/include
+DEPENDPATH += $$PWD/../packages64bit/include
 
-INCLUDEPATH += C:/Users/Shbli/Workspace/packages/boost-program-options_x86-windows/include
-DEPENDPATH += C:/Users/Shbli/Workspace/packages/boost-program-options_x86-windows/include
-
-PRE_TARGETDEPS += C:/Users/Shbli/Workspace/packages/boost-program-options_x86-windows/lib/boost_program_options-vc140-mt.lib
-
-
-LIBS += -LC:/Users/Shbli/Workspace/packages/boost-system_x86-windows/lib/ -lboost_system-vc140-mt
-
-INCLUDEPATH += C:/Users/Shbli/Workspace/packages/boost-system_x86-windows/include
-DEPENDPATH += C:/Users/Shbli/Workspace/packages/boost-system_x86-windows/include
-
-PRE_TARGETDEPS += C:/Users/Shbli/Workspace/packages/boost-system_x86-windows/lib/boost_system-vc140-mt.lib
-
-
-LIBS += -LC:/Users/Shbli/Workspace/packages/boost-thread_x86-windows/lib/ -lboost_thread-vc140-mt
-
-INCLUDEPATH += C:/Users/Shbli/Workspace/packages/boost-thread_x86-windows/include
-DEPENDPATH += C:/Users/Shbli/Workspace/packages/boost-thread_x86-windows/include
-
-PRE_TARGETDEPS += C:/Users/Shbli/Workspace/packages/boost-thread_x86-windows/lib/boost_thread-vc140-mt.lib
-
-LIBS += -LC:/Users/Shbli/Workspace/packages/zlib_x86-windows/lib/ -lzlib
-
-INCLUDEPATH += C:/Users/Shbli/Workspace/packages/zlib_x86-windows/include
-DEPENDPATH += C:/Users/Shbli/Workspace/packages/zlib_x86-windows/include
-
-PRE_TARGETDEPS += C:/Users/Shbli/Workspace/packages/zlib_x86-windows/lib/zlib.lib
-
-LIBS += -LC:/Users/Shbli/Workspace/packages/openssl-1.1.0f-vs2017/lib/ -llibcryptoMT
-
-INCLUDEPATH += C:/Users/Shbli/Workspace/packages/openssl-1.1.0f-vs2017/include
-DEPENDPATH += C:/Users/Shbli/Workspace/packages/openssl-1.1.0f-vs2017/include
-
-PRE_TARGETDEPS += C:/Users/Shbli/Workspace/packages/openssl-1.1.0f-vs2017/lib/libcryptoMT.lib
-
-
-LIBS += -LC:/Users/Shbli/Workspace/packages/openssl-1.1.0f-vs2017/lib/ -llibsslMT
-
-INCLUDEPATH += C:/Users/Shbli/Workspace/packages/openssl-1.1.0f-vs2017/include
-DEPENDPATH += C:/Users/Shbli/Workspace/packages/openssl-1.1.0f-vs2017/include
-
-PRE_TARGETDEPS += C:/Users/Shbli/Workspace/packages/openssl-1.1.0f-vs2017/lib/libsslMT.lib
-
-
-LIBS += -LC:/Users/Shbli/Workspace/packages/libevent_x86-windows/lib/ -levent
-
-INCLUDEPATH += C:/Users/Shbli/Workspace/packages/libevent_x86-windows/include
-DEPENDPATH += C:/Users/Shbli/Workspace/packages/libevent_x86-windows/include
-
-PRE_TARGETDEPS += C:/Users/Shbli/Workspace/packages/libevent_x86-windows/lib/event.lib
-
-
-LIBS += -LC:/Users/Shbli/Workspace/packages/libevent_x86-windows/lib/ -levent_core
-
-INCLUDEPATH += C:/Users/Shbli/Workspace/packages/libevent_x86-windows/include
-DEPENDPATH += C:/Users/Shbli/Workspace/packages/libevent_x86-windows/include
-
-PRE_TARGETDEPS += C:/Users/Shbli/Workspace/packages/libevent_x86-windows/lib/event_core.lib
-
-LIBS += -LC:/Users/Shbli/Workspace/packages/libevent_x86-windows/lib/ -levent_extra
-
-INCLUDEPATH += C:/Users/Shbli/Workspace/packages/libevent_x86-windows/include
-DEPENDPATH += C:/Users/Shbli/Workspace/packages/libevent_x86-windows/include
-
-PRE_TARGETDEPS += C:/Users/Shbli/Workspace/packages/libevent_x86-windows/lib/event_extra.lib
+LIBS += -L$$PWD/../packages64bit/lib/ -llua
+PRE_TARGETDEPS += $$PWD/../packages64bit/lib/lua.lib
+LIBS += -L$$PWD/../packages64bit/lib -lboost_chrono-vc140-mt
+PRE_TARGETDEPS += $$PWD/../packages64bit/lib/boost_chrono-vc140-mt.lib
+LIBS += -L$$PWD/../packages64bit/lib/ -lboost_filesystem-vc140-mt
+PRE_TARGETDEPS += $$PWD/../packages64bit/lib/boost_filesystem-vc140-mt.lib
+LIBS += -L$$PWD/../packages64bit/lib/ -lboost_program_options-vc140-mt
+PRE_TARGETDEPS += $$PWD/../packages64bit/lib//boost_program_options-vc140-mt.lib
+LIBS += -L$$PWD/../packages64bit/lib/ -lboost_system-vc140-mt
+PRE_TARGETDEPS += $$PWD/../packages64bit/lib//boost_system-vc140-mt.lib
+LIBS += -L$$PWD/../packages64bit/lib/ -lboost_thread-vc140-mt
+PRE_TARGETDEPS += $$PWD/../packages64bit/lib//boost_thread-vc140-mt.lib
+LIBS += -L$$PWD/../packages64bit/lib/ -lzlib
+PRE_TARGETDEPS += $$PWD/../packages64bit/lib/zlib.lib
+LIBS += -L$$PWD/../packages64bit/lib/ -llibcryptoMD
+PRE_TARGETDEPS += $$PWD/../packages64bit/lib/libcryptoMD.lib
+LIBS += -L$$PWD/../packages64bit/lib/ -llibsslMT
+PRE_TARGETDEPS += $$PWD/../packages64bit/lib/libsslMT.lib
+LIBS += -L$$PWD/../packages64bit/lib/ -levent
+PRE_TARGETDEPS += $$PWD/../packages64bit/lib/event.lib
+LIBS += -L$$PWD/../packages64bit/lib/ -levent_core
+PRE_TARGETDEPS += $$PWD/../packages64bit/lib/event_core.lib
+LIBS += -L$$PWD/../packages64bit/lib/ -levent_extra
+PRE_TARGETDEPS += $$PWD/../packages64bit/lib/event_extra.lib
+LIBS += -L$$PWD/../packages64bit/lib/ -lWS2_32
+PRE_TARGETDEPS += $$PWD/../packages64bit/lib/WS2_32.lib
+LIBS += -L$$PWD/../packages64bit/lib/ -lAdvAPI32
+PRE_TARGETDEPS += $$PWD/../packages64bit/lib/AdvAPI32.lib
 
 TEMPLATE = app
 TARGET = tor
 
 QMAKE_CXXFLAGS += /MD
+QMAKE_CXXFLAGS += /NODEFAULTLIB
 QMAKE_CXXFLAGS += /MT
-    QMAKE_CXXFLAGS += -std=c++14
+QMAKE_CXXFLAGS += -std=c++14
 
 #find . -type d
 INCLUDEPATH += . ./.vs ./.vs/tor ./.vs/tor/v15 ./.vs/tor/v15/ipch ./.vs/tor/v15/ipch/AutoPCH ./autom4te.cache ./changes ./contrib ./contrib/clang ./contrib/client-tools ./contrib/dirauth-tools ./contrib/dist ./contrib/dist/suse ./contrib/operator-tools ./contrib/or-tools ./contrib/win32build ./doc ./doc/contrib ./doc/HACKING ./m4 ./scripts ./scripts/coccinelle ./scripts/codegen ./scripts/maint ./scripts/test ./src ./src/adapter ./src/common ./src/common/.deps ./src/config ./src/ext ./src/ext/.deps ./src/ext/curve25519_donna ./src/ext/curve25519_donna/.deps ./src/ext/ed25519 ./src/ext/ed25519/donna ./src/ext/ed25519/donna/.deps ./src/ext/ed25519/donna/fuzz ./src/ext/ed25519/ref10 ./src/ext/ed25519/ref10/.deps ./src/ext/keccak-tiny ./src/ext/keccak-tiny/.deps ./src/ext/mulodi ./src/ext/mulodi/.deps ./src/ext/rust ./src/ext/timeouts ./src/ext/timeouts/.deps ./src/ext/timeouts/bench ./src/ext/timeouts/lua ./src/ext/trunnel ./src/ext/trunnel/.deps ./src/or ./src/or/.deps ./src/rust ./src/rust/.cargo ./src/rust/tor_util ./src/rust/tor_util/tests ./src/test ./src/test/fuzz ./src/test/fuzz/dict ./src/tools ./src/tools/tor-fw-helper ./src/trace ./src/trunnel ./src/trunnel/.deps ./src/trunnel/hs ./src/trunnel/hs/.deps
@@ -179,7 +119,7 @@ HEADERS += \
     src/common/util_process.h \
     src/common/workqueue.h \
     src/ext/ed25519/donna/fuzz/curve25519-ref10.h \
-    src/ext/ed25519/donna/fuzz/ed25519-donna.h \
+#    src/ext/ed25519/donna/fuzz/ed25519-donna.h \
     src/ext/ed25519/donna/fuzz/ed25519-ref10.h \
     src/ext/ed25519/donna/curve25519-donna-32bit.h \
     src/ext/ed25519/donna/curve25519-donna-64bit.h \
@@ -202,7 +142,7 @@ HEADERS += \
     src/ext/ed25519/donna/ed25519-hash.h \
     src/ext/ed25519/donna/ed25519-randombytes-custom.h \
     src/ext/ed25519/donna/ed25519-randombytes.h \
-    src/ext/ed25519/donna/ed25519.h \
+#    src/ext/ed25519/donna/ed25519.h \
     src/ext/ed25519/donna/ed25519_donna_tor.h \
     src/ext/ed25519/donna/modm-donna-32bit.h \
     src/ext/ed25519/donna/modm-donna-64bit.h \
@@ -395,18 +335,18 @@ SOURCES += \
     src/common/util_format.c \
     src/common/util_process.c \
     src/common/workqueue.c \
-#    src/ext/curve25519_donna/curve25519-donna-c64.c \
-    src/ext/curve25519_donna/curve25519-donna.c \
+    src/ext/curve25519_donna/curve25519-donna-c64.c \
+#    src/ext/curve25519_donna/curve25519-donna.c \
     src/ext/ed25519/donna/fuzz/curve25519-ref10.c \
     src/ext/ed25519/donna/fuzz/ed25519-donna-sse2.c \
-    src/ext/ed25519/donna/fuzz/ed25519-donna.c \
+#    src/ext/ed25519/donna/fuzz/ed25519-donna.c \
     src/ext/ed25519/donna/fuzz/ed25519-ref10.c \
-    src/ext/ed25519/donna/fuzz/fuzz-curve25519.c \
-    src/ext/ed25519/donna/fuzz/fuzz-ed25519.c \
-    src/ext/ed25519/donna/ed25519.c \
+#    src/ext/ed25519/donna/fuzz/fuzz-curve25519.c \
+#    src/ext/ed25519/donna/fuzz/fuzz-ed25519.c \
+#    src/ext/ed25519/donna/ed25519.c \
     src/ext/ed25519/donna/ed25519_tor.c \
     src/ext/ed25519/donna/test-internals.c \
-    src/ext/ed25519/donna/test.c \
+#    src/ext/ed25519/donna/test.c \
     src/ext/ed25519/ref10/blinding.c \
     src/ext/ed25519/ref10/fe_0.c \
     src/ext/ed25519/ref10/fe_1.c \
@@ -448,15 +388,15 @@ SOURCES += \
     src/ext/ed25519/ref10/sc_muladd.c \
     src/ext/ed25519/ref10/sc_reduce.c \
     src/ext/ed25519/ref10/sign.c \
-    src/ext/keccak-tiny/keccak-tiny-unrolled.c \
+#    src/ext/keccak-tiny/keccak-tiny-unrolled.c \
     src/ext/keccak-tiny/keccak-tiny.c \
     src/ext/mulodi/mulodi4.c \
-    src/ext/timeouts/bench/bench-heap.c \
-    src/ext/timeouts/bench/bench-llrb.c \
+#    src/ext/timeouts/bench/bench-heap.c \
+#    src/ext/timeouts/bench/bench-llrb.c \
     src/ext/timeouts/bench/bench-wheel.c \
     src/ext/timeouts/bench/bench.c \
     src/ext/timeouts/lua/timeout-lua.c \
-    src/ext/timeouts/test-timeout.c \
+#    src/ext/timeouts/test-timeout.c \
     src/ext/timeouts/timeout-bitops.c \
     src/ext/timeouts/timeout.c \
     src/ext/trunnel/trunnel.c \
@@ -668,8 +608,8 @@ SOURCES += \
 #    src/test/test_workqueue.c \
 #    src/test/testing_common.c \
 #    src/test/testing_rsakeys.c \
-    src/tools/tor-gencert.c \
-    src/tools/tor-resolve.c \
+#    src/tools/tor-gencert.c \
+#    src/tools/tor-resolve.c \
     src/trace/trace.c \
     src/trunnel/hs/cell_common.c \
     src/trunnel/hs/cell_establish_intro.c \

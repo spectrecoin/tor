@@ -8,12 +8,6 @@
 #include <stdint.h>
 #include "trunnel.h"
 
-#if defined(_MSC_VER)
-#include <BaseTsd.h>
-typedef SSIZE_T ssize_t;
-#endif
-
-
 #if !defined(TRUNNEL_OPAQUE) && !defined(TRUNNEL_OPAQUE_TRN_CELL_EXTENSION_FIELDS)
 struct trn_cell_extension_fields_st {
   uint8_t field_type;

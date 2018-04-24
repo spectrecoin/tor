@@ -8,11 +8,6 @@
 #include <stdint.h>
 #include "trunnel.h"
 
-#if defined(_MSC_VER)
-#include <BaseTsd.h>
-typedef SSIZE_T ssize_t;
-#endif
-
 struct trn_cell_extension_st;
 #define TRUNNEL_SHA3_256_LEN 32
 #if !defined(TRUNNEL_OPAQUE) && !defined(TRUNNEL_OPAQUE_TRN_CELL_ESTABLISH_INTRO)
