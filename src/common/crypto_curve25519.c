@@ -27,7 +27,9 @@
 #include "util.h"
 #include "torlog.h"
 
+#ifndef _MSC_VER
 #include "ed25519/donna/ed25519_donna_tor.h"
+#endif
 
 /* ==============================
    Part 1: wrap a suitable curve25519 implementation as curve25519_impl
@@ -97,7 +99,9 @@ curve25519_basepoint_impl(uint8_t *output, const uint8_t *secret)
    * NaCl available.  I suspected that the ed25519 optimization always wins.
    */
   if (PREDICT_LIKELY(curve25519_use_ed == 1)) {
-    curved25519_scalarmult_basepoint_donna(output, secret);
+#ifndef _MSC_VER
+      curved25519_scalarmult_basepoint_donna(output, secret);
+#endif
     r = 0;
   } else {
     static const uint8_t basepoint[32] = {9};

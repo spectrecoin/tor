@@ -4,6 +4,10 @@
 #ifndef TOR_CRYPTO_CURVE25519_H
 #define TOR_CRYPTO_CURVE25519_H
 
+#ifdef _MSC_VER
+#define CRYPTO_CURVE25519_PRIVATE
+#endif
+
 #include "testsupport.h"
 #include "torint.h"
 

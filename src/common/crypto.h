@@ -21,9 +21,8 @@
 #include "compat.h"
 
 #include <openssl/engine.h>
-#ifndef _MSC_VER
 #include "keccak-tiny/keccak-tiny.h"
-#endif
+
 /*
   Macro to create an arbitrary OpenSSL version number as used by
   OPENSSL_VERSION_NUMBER or SSLeay(), since the actual numbers are a bit hard

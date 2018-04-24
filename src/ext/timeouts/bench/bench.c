@@ -1,6 +1,10 @@
 #ifdef _MSC_VER
 #include <stdio.h>
 #include <windows.h>
+static int random()
+{
+    return rand();
+}
 #elif
 #include <unistd.h>
 #include <dlfcn.h>
@@ -82,9 +86,9 @@ static int long long monotime(void) {
 #elif _MSC_VER
     SYSTEMTIME st;
     GetSystemTime(&st);
-      return (st.wSecond * 1000000L) + (st.wMilliseconds / 1000L);
+    return (st.wSecond * 1000000L) + (st.wMilliseconds / 1000L);
 #else
-	struct timespec ts;
+    struct timespec ts;
 
     clock_gettime(CLOCK_MONOTONIC, &ts);
 
@@ -124,10 +128,10 @@ static int bench_new(lua_State *L) {
 #ifndef _MSC_VER
     if (!(B->solib = dlopen(path, RTLD_NOW|RTLD_LOCAL)))
 		return luaL_error(L, "%s: %s", path, dlerror());
-#endif
 
 	if (!(ops = dlsym(B->solib, "benchops")))
 		return luaL_error(L, "%s: %s", path, dlerror());
+#endif
 
 	B->ops = *ops;
 	B->state = B->ops.init(B->timeout, B->count, B->verbose);
@@ -141,7 +145,7 @@ static int bench_add(lua_State *L) {
 	unsigned i;
 	timeout_t t;
 
-	i = (lua_isnoneornil(L, 2))? random() % B->count : (unsigned)luaL_checkinteger(L, 2);
+    i = (lua_isnoneornil(L, 2))? random() % B->count : (unsigned)luaL_checkinteger(L, 2);
 	t = (lua_isnoneornil(L, 3))? random() % B->timeout_max : (unsigned)luaL_checkinteger(L, 3);
 
 	B->ops.add(B->state, &B->timeout[i], t);
@@ -151,7 +155,7 @@ static int bench_add(lua_State *L) {
 
 
 static int bench_del(lua_State *L) {
-	struct bench *B = lua_touserdata(L, 1);
+    struct bench *B = lua_touserdata(L, 1);
 	size_t i = luaL_optinteger(L, 2, random() % B->count);
 	size_t j = luaL_optinteger(L, 3, i);
 
@@ -159,7 +163,6 @@ static int bench_del(lua_State *L) {
 		B->ops.del(B->state, &B->timeout[i]);
 		++i;
 	}
-
 	return 0;
 } /* bench_del() */
 

@@ -1,28 +1,3 @@
-#TEMPLATE = app
-#TARGET = spectre
-##find . -type d
-#QT += testlib webenginewidgets webchannel
-
-#TEMPLATE = subdirs
-
-#SUBDIRS = \
-#    common \   # sub-project names
-#    donna \   # sub-project names
-#    keccak \   # sub-project names
-#    or \   # sub-project names
-#    ref10 \   # sub-project names
-#    trunnel \   # sub-project names
-
-#common.subdir = $$PWD/src/common
-#donna.subdir = $$PWD/src/ext/ed25519/donna
-#keccak.subdir = $$PWD/src/ext/keccak-tiny
-#or.subdir = $$PWD/src/or
-#ref10.subdir = $$PWD/src/ext/ed25519/ref10
-#trunnel.subdir = $$PWD/src/trunnel
-
-#common.depends = trunnel
-
-#  CONFIG += ordered
 #Command to install dependencies
 #vcpkg.exe install boost:x64-windows-static berkeleydb:x64-windows-static leveldb:x64-windows-static libevent:x64-windows-static lua:x64-windows-static openssl:x64-windows-static zlib:x64-windows-static
 DEFINES += BOOST_ASIO_ENABLE_OLD_SERVICES BOOST_SPIRIT_THREADSAFE BOOST_THREAD_USE_LIB
@@ -39,15 +14,15 @@ PRE_TARGETDEPS += $$PWD/../packages64bit/lib/boost_chrono-vc140-mt.lib
 LIBS += -L$$PWD/../packages64bit/lib/ -lboost_filesystem-vc140-mt
 PRE_TARGETDEPS += $$PWD/../packages64bit/lib/boost_filesystem-vc140-mt.lib
 LIBS += -L$$PWD/../packages64bit/lib/ -lboost_program_options-vc140-mt
-PRE_TARGETDEPS += $$PWD/../packages64bit/lib//boost_program_options-vc140-mt.lib
+PRE_TARGETDEPS += $$PWD/../packages64bit/lib/boost_program_options-vc140-mt.lib
 LIBS += -L$$PWD/../packages64bit/lib/ -lboost_system-vc140-mt
-PRE_TARGETDEPS += $$PWD/../packages64bit/lib//boost_system-vc140-mt.lib
+PRE_TARGETDEPS += $$PWD/../packages64bit/lib/boost_system-vc140-mt.lib
 LIBS += -L$$PWD/../packages64bit/lib/ -lboost_thread-vc140-mt
-PRE_TARGETDEPS += $$PWD/../packages64bit/lib//boost_thread-vc140-mt.lib
+PRE_TARGETDEPS += $$PWD/../packages64bit/lib/boost_thread-vc140-mt.lib
 LIBS += -L$$PWD/../packages64bit/lib/ -lzlib
 PRE_TARGETDEPS += $$PWD/../packages64bit/lib/zlib.lib
-LIBS += -L$$PWD/../packages64bit/lib/ -llibcryptoMD
-PRE_TARGETDEPS += $$PWD/../packages64bit/lib/libcryptoMD.lib
+LIBS += -L$$PWD/../packages64bit/lib/ -llibcryptoMT
+PRE_TARGETDEPS += $$PWD/../packages64bit/lib/libcryptoMT.lib
 LIBS += -L$$PWD/../packages64bit/lib/ -llibsslMT
 PRE_TARGETDEPS += $$PWD/../packages64bit/lib/libsslMT.lib
 LIBS += -L$$PWD/../packages64bit/lib/ -levent
@@ -60,12 +35,16 @@ LIBS += -L$$PWD/../packages64bit/lib/ -lWS2_32
 PRE_TARGETDEPS += $$PWD/../packages64bit/lib/WS2_32.lib
 LIBS += -L$$PWD/../packages64bit/lib/ -lAdvAPI32
 PRE_TARGETDEPS += $$PWD/../packages64bit/lib/AdvAPI32.lib
+LIBS += -L$$PWD/../packages64bit/lib/ -lshell32
+PRE_TARGETDEPS += $$PWD/../packages64bit/lib/shell32.lib
+LIBS += -L$$PWD/../packages64bit/lib/ -lUser32
+PRE_TARGETDEPS += $$PWD/../packages64bit/lib/User32.lib
 
-TEMPLATE = app
-TARGET = tor
+TEMPLATE = lib
+TARGET = torlib
+CONFIG += static
 
 QMAKE_CXXFLAGS += /MD
-QMAKE_CXXFLAGS += /NODEFAULTLIB
 QMAKE_CXXFLAGS += /MT
 QMAKE_CXXFLAGS += -std=c++14
 
@@ -73,51 +52,6 @@ QMAKE_CXXFLAGS += -std=c++14
 INCLUDEPATH += . ./.vs ./.vs/tor ./.vs/tor/v15 ./.vs/tor/v15/ipch ./.vs/tor/v15/ipch/AutoPCH ./autom4te.cache ./changes ./contrib ./contrib/clang ./contrib/client-tools ./contrib/dirauth-tools ./contrib/dist ./contrib/dist/suse ./contrib/operator-tools ./contrib/or-tools ./contrib/win32build ./doc ./doc/contrib ./doc/HACKING ./m4 ./scripts ./scripts/coccinelle ./scripts/codegen ./scripts/maint ./scripts/test ./src ./src/adapter ./src/common ./src/common/.deps ./src/config ./src/ext ./src/ext/.deps ./src/ext/curve25519_donna ./src/ext/curve25519_donna/.deps ./src/ext/ed25519 ./src/ext/ed25519/donna ./src/ext/ed25519/donna/.deps ./src/ext/ed25519/donna/fuzz ./src/ext/ed25519/ref10 ./src/ext/ed25519/ref10/.deps ./src/ext/keccak-tiny ./src/ext/keccak-tiny/.deps ./src/ext/mulodi ./src/ext/mulodi/.deps ./src/ext/rust ./src/ext/timeouts ./src/ext/timeouts/.deps ./src/ext/timeouts/bench ./src/ext/timeouts/lua ./src/ext/trunnel ./src/ext/trunnel/.deps ./src/or ./src/or/.deps ./src/rust ./src/rust/.cargo ./src/rust/tor_util ./src/rust/tor_util/tests ./src/test ./src/test/fuzz ./src/test/fuzz/dict ./src/tools ./src/tools/tor-fw-helper ./src/trace ./src/trunnel ./src/trunnel/.deps ./src/trunnel/hs ./src/trunnel/hs/.deps
 
 HEADERS += \
-    src/adapter/orconfig.h \
-    src/adapter/orconfig_apple.h \
-    src/adapter/orconfig_linux.h \
-    src/adapter/orconfig_win32.h \
-    src/common/address.h \
-    src/common/aes.h \
-    src/common/backtrace.h \
-    src/common/buffers.h \
-    src/common/buffers_tls.h \
-    src/common/compat.h \
-    src/common/compat_libevent.h \
-    src/common/compat_openssl.h \
-    src/common/compat_rust.h \
-    src/common/compat_threads.h \
-    src/common/compat_time.h \
-    src/common/compress.h \
-    src/common/compress_lzma.h \
-    src/common/compress_none.h \
-    src/common/compress_zlib.h \
-    src/common/compress_zstd.h \
-    src/common/confline.h \
-    src/common/container.h \
-    src/common/crypto.h \
-    src/common/crypto_curve25519.h \
-    src/common/crypto_ed25519.h \
-    src/common/crypto_format.h \
-    src/common/crypto_pwbox.h \
-    src/common/crypto_s2k.h \
-    src/common/di_ops.h \
-    src/common/handles.h \
-    src/common/memarea.h \
-    src/common/procmon.h \
-    src/common/pubsub.h \
-    src/common/sandbox.h \
-    src/common/storagedir.h \
-    src/common/testsupport.h \
-    src/common/timers.h \
-    src/common/torint.h \
-    src/common/torlog.h \
-    src/common/tortls.h \
-    src/common/util.h \
-    src/common/util_bug.h \
-    src/common/util_format.h \
-    src/common/util_process.h \
-    src/common/workqueue.h \
     src/ext/ed25519/donna/fuzz/curve25519-ref10.h \
 #    src/ext/ed25519/donna/fuzz/ed25519-donna.h \
     src/ext/ed25519/donna/fuzz/ed25519-ref10.h \
@@ -186,6 +120,51 @@ HEADERS += \
     src/ext/tinytest_macros.h \
     src/ext/tor_queue.h \
     src/ext/tor_readpassphrase.h \
+    src/adapter/orconfig.h \
+    src/adapter/orconfig_apple.h \
+    src/adapter/orconfig_linux.h \
+    src/adapter/orconfig_win32.h \
+    src/common/address.h \
+    src/common/aes.h \
+    src/common/backtrace.h \
+    src/common/buffers.h \
+    src/common/buffers_tls.h \
+    src/common/compat.h \
+    src/common/compat_libevent.h \
+    src/common/compat_openssl.h \
+    src/common/compat_rust.h \
+    src/common/compat_threads.h \
+    src/common/compat_time.h \
+    src/common/compress.h \
+    src/common/compress_lzma.h \
+    src/common/compress_none.h \
+    src/common/compress_zlib.h \
+    src/common/compress_zstd.h \
+    src/common/confline.h \
+    src/common/container.h \
+    src/common/crypto.h \
+    src/common/crypto_curve25519.h \
+    src/common/crypto_ed25519.h \
+    src/common/crypto_format.h \
+    src/common/crypto_pwbox.h \
+    src/common/crypto_s2k.h \
+    src/common/di_ops.h \
+    src/common/handles.h \
+    src/common/memarea.h \
+    src/common/procmon.h \
+    src/common/pubsub.h \
+    src/common/sandbox.h \
+    src/common/storagedir.h \
+    src/common/testsupport.h \
+    src/common/timers.h \
+    src/common/torint.h \
+    src/common/torlog.h \
+    src/common/tortls.h \
+    src/common/util.h \
+    src/common/util_bug.h \
+    src/common/util_format.h \
+    src/common/util_process.h \
+    src/common/workqueue.h \
     src/or/addressmap.h \
     src/or/bridges.h \
     src/or/channel.h \
@@ -297,44 +276,22 @@ HEADERS += \
     src/trunnel/trunnel-local.h
 
 SOURCES += \
-    src/common/address.c \
-    src/common/aes.c \
-    src/common/backtrace.c \
-    src/common/buffers.c \
-    src/common/buffers_tls.c \
-    src/common/compat.c \
-    src/common/compat_libevent.c \
-    src/common/compat_rust.c \
-    src/common/compat_threads.c \
-    src/common/compat_time.c \
-    src/common/compat_winthreads.c \
-    src/common/compress.c \
-    src/common/compress_lzma.c \
-    src/common/compress_none.c \
-    src/common/compress_zlib.c \
-    src/common/compress_zstd.c \
-    src/common/confline.c \
-    src/common/container.c \
-    src/common/crypto.c \
-    src/common/crypto_curve25519.c \
-    src/common/crypto_ed25519.c \
-    src/common/crypto_format.c \
-    src/common/crypto_pwbox.c \
-    src/common/crypto_s2k.c \
-    src/common/di_ops.c \
-    src/common/log.c \
-    src/common/memarea.c \
-    src/common/procmon.c \
-    src/common/pubsub.c \
-    src/common/sandbox.c \
-    src/common/storagedir.c \
-    src/common/timers.c \
-    src/common/tortls.c \
-    src/common/util.c \
-    src/common/util_bug.c \
-    src/common/util_format.c \
-    src/common/util_process.c \
-    src/common/workqueue.c \
+#    src/ext/timeouts/bench/bench-heap.c \
+#    src/ext/timeouts/bench/bench-llrb.c \
+    src/ext/timeouts/bench/bench-wheel.c \
+    src/ext/timeouts/bench/bench.c \
+    src/ext/timeouts/lua/timeout-lua.c \
+#    src/ext/timeouts/test-timeout.c \
+    src/ext/timeouts/timeout-bitops.c \
+    src/ext/timeouts/timeout.c \
+    src/ext/trunnel/trunnel.c \
+    src/ext/csiphash.c \
+#    src/ext/OpenBSD_malloc_Linux.c \
+#    src/ext/readpassphrase.c \
+    src/ext/strlcat.c \
+    src/ext/strlcpy.c \
+    src/ext/tinytest.c \
+#    src/ext/tinytest_demo.c \
     src/ext/curve25519_donna/curve25519-donna-c64.c \
 #    src/ext/curve25519_donna/curve25519-donna.c \
     src/ext/ed25519/donna/fuzz/curve25519-ref10.c \
@@ -388,25 +345,47 @@ SOURCES += \
     src/ext/ed25519/ref10/sc_muladd.c \
     src/ext/ed25519/ref10/sc_reduce.c \
     src/ext/ed25519/ref10/sign.c \
-#    src/ext/keccak-tiny/keccak-tiny-unrolled.c \
-    src/ext/keccak-tiny/keccak-tiny.c \
+    src/ext/keccak-tiny/keccak-tiny-unrolled.c \
+#    src/ext/keccak-tiny/keccak-tiny.c \
     src/ext/mulodi/mulodi4.c \
-#    src/ext/timeouts/bench/bench-heap.c \
-#    src/ext/timeouts/bench/bench-llrb.c \
-    src/ext/timeouts/bench/bench-wheel.c \
-    src/ext/timeouts/bench/bench.c \
-    src/ext/timeouts/lua/timeout-lua.c \
-#    src/ext/timeouts/test-timeout.c \
-    src/ext/timeouts/timeout-bitops.c \
-    src/ext/timeouts/timeout.c \
-    src/ext/trunnel/trunnel.c \
-    src/ext/csiphash.c \
-#    src/ext/OpenBSD_malloc_Linux.c \
-#    src/ext/readpassphrase.c \
-    src/ext/strlcat.c \
-    src/ext/strlcpy.c \
-    src/ext/tinytest.c \
-#    src/ext/tinytest_demo.c \
+    src/common/address.c \
+    src/common/aes.c \
+    src/common/backtrace.c \
+    src/common/buffers.c \
+    src/common/buffers_tls.c \
+    src/common/compat.c \
+    src/common/compat_libevent.c \
+    src/common/compat_rust.c \
+    src/common/compat_threads.c \
+    src/common/compat_time.c \
+    src/common/compat_winthreads.c \
+    src/common/compress.c \
+    src/common/compress_lzma.c \
+    src/common/compress_none.c \
+    src/common/compress_zlib.c \
+    src/common/compress_zstd.c \
+    src/common/confline.c \
+    src/common/container.c \
+    src/common/crypto_curve25519.c \
+    src/common/crypto_ed25519.c \
+    src/common/crypto_format.c \
+    src/common/crypto_pwbox.c \
+    src/common/crypto_s2k.c \
+    src/common/di_ops.c \
+    src/common/log.c \
+    src/common/memarea.c \
+    src/common/procmon.c \
+    src/common/pubsub.c \
+    src/common/sandbox.c \
+    src/common/storagedir.c \
+    src/common/timers.c \
+    src/common/tortls.c \
+    src/common/util.c \
+    src/common/util_bug.c \
+    src/common/util_format.c \
+    src/common/util_process.c \
+    src/common/workqueue.c \
+    src/common/crypto.c \
     src/or/addressmap.c \
     src/or/bridges.c \
     src/or/channel.c \
