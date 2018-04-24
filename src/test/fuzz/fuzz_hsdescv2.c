@@ -17,7 +17,9 @@ int
 fuzz_init(void)
 {
   disable_signature_checking();
+#ifndef _MSC_VER
   MOCK(dump_desc, mock_dump_desc__nodump);
+#endif
   ed25519_init();
   return 0;
 }

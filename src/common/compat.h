@@ -124,7 +124,9 @@
 
 /* inline is __inline on windows. */
 #ifdef _WIN32
+#ifndef HAVE___INLINE
 #define inline __inline
+#endif
 #endif
 
 /* Try to get a reasonable __func__ substitute in place. */

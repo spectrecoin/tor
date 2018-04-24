@@ -28,7 +28,10 @@
 #define _MIN_HEAP_H_
 
 #include <stdlib.h>
+#ifdef _MSC_VER
+#elif
 #include <err.h>
+#endif
 #include "timeout.h"
 #include "bench.h"
 

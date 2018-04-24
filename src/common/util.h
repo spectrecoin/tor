@@ -25,10 +25,14 @@
 #include "util_bug.h"
 
 #ifndef O_BINARY
+#ifndef HAVE_O_BINARY
 #define O_BINARY 0
 #endif
+#endif
 #ifndef O_TEXT
+#ifndef HAVE_O_TEXT
 #define O_TEXT 0
+#endif
 #endif
 #ifndef O_NOFOLLOW
 #define O_NOFOLLOW 0

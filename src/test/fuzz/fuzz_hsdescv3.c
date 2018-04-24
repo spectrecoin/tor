@@ -63,9 +63,11 @@ int
 fuzz_init(void)
 {
   disable_signature_checking();
+#ifndef _MSC_VER
   MOCK(dump_desc, mock_dump_desc__nodump);
   MOCK(rsa_ed25519_crosscert_check, mock_rsa_ed25519_crosscert_check);
   MOCK(decrypt_desc_layer, mock_decrypt_desc_layer);
+#endif
   ed25519_init();
   return 0;
 }

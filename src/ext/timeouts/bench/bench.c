@@ -1,9 +1,15 @@
+#ifdef _MSC_VER
+#include <stdio.h>
+#include <windows.h>
+#elif
+#include <unistd.h>
+#include <dlfcn.h>
+#endif
+
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 #include <errno.h>
-#include <unistd.h>
-#include <dlfcn.h>
 
 #if __APPLE__
 #include <mach/mach_time.h>
@@ -73,10 +79,14 @@ static int long long monotime(void) {
 	abt = abt * timebase.numer / timebase.denom;
 
 	return abt / 1000LL;
+#elif _MSC_VER
+    SYSTEMTIME st;
+    GetSystemTime(&st);
+      return (st.wSecond * 1000000L) + (st.wMilliseconds / 1000L);
 #else
 	struct timespec ts;
 
-	clock_gettime(CLOCK_MONOTONIC, &ts);
+    clock_gettime(CLOCK_MONOTONIC, &ts);
 
 	return (ts.tv_sec * 1000000L) + (ts.tv_nsec / 1000L);
 #endif
@@ -111,8 +121,10 @@ static int bench_new(lua_State *L) {
 	if (!(B->timeout = calloc(count, sizeof *B->timeout)))
 		return luaL_error(L, "%s", strerror(errno));
 
-	if (!(B->solib = dlopen(path, RTLD_NOW|RTLD_LOCAL)))
+#ifndef _MSC_VER
+    if (!(B->solib = dlopen(path, RTLD_NOW|RTLD_LOCAL)))
 		return luaL_error(L, "%s: %s", path, dlerror());
+#endif
 
 	if (!(ops = dlsym(B->solib, "benchops")))
 		return luaL_error(L, "%s: %s", path, dlerror());
