@@ -44,6 +44,8 @@ TEMPLATE = lib
 TARGET = torlib
 CONFIG += static
 
+DESTDIR = $$PWD
+
 QMAKE_CXXFLAGS += /MD
 QMAKE_CXXFLAGS += /MT
 QMAKE_CXXFLAGS += -std=c++14
