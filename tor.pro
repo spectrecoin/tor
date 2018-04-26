@@ -21,10 +21,10 @@ LIBS += -L$$PWD/../packages64bit/lib/ -lboost_thread-vc140-mt
 PRE_TARGETDEPS += $$PWD/../packages64bit/lib/boost_thread-vc140-mt.lib
 LIBS += -L$$PWD/../packages64bit/lib/ -lzlib
 PRE_TARGETDEPS += $$PWD/../packages64bit/lib/zlib.lib
-LIBS += -L$$PWD/../packages64bit/lib/ -llibcryptoMT
-PRE_TARGETDEPS += $$PWD/../packages64bit/lib/libcryptoMT.lib
-LIBS += -L$$PWD/../packages64bit/lib/ -llibsslMT
-PRE_TARGETDEPS += $$PWD/../packages64bit/lib/libsslMT.lib
+LIBS += -L$$PWD/../packages64bit/lib/ -llibcryptoMD
+PRE_TARGETDEPS += $$PWD/../packages64bit/lib/libcryptoMD.lib
+LIBS += -L$$PWD/../packages64bit/lib/ -llibsslMD
+PRE_TARGETDEPS += $$PWD/../packages64bit/lib/libsslMD.lib
 LIBS += -L$$PWD/../packages64bit/lib/ -levent
 PRE_TARGETDEPS += $$PWD/../packages64bit/lib/event.lib
 LIBS += -L$$PWD/../packages64bit/lib/ -levent_core
@@ -39,15 +39,21 @@ LIBS += -L$$PWD/../packages64bit/lib/ -lshell32
 PRE_TARGETDEPS += $$PWD/../packages64bit/lib/shell32.lib
 LIBS += -L$$PWD/../packages64bit/lib/ -lUser32
 PRE_TARGETDEPS += $$PWD/../packages64bit/lib/User32.lib
+LIBS += -L$$PWD/../packages64bit/lib/ -lCrypt32
+PRE_TARGETDEPS += $$PWD/../packages64bit/lib/Crypt32.lib
 
 TEMPLATE = lib
 TARGET = torlib
+DEFINES += NO_MAIN
+
+#TEMPLATE = app
+#TARGET = torapp
+
+#generate a static .lib instead of a dll
 CONFIG += static
 
 DESTDIR = $$PWD
 
-QMAKE_CXXFLAGS += /MD
-QMAKE_CXXFLAGS += /MT
 QMAKE_CXXFLAGS += -std=c++14
 
 #find . -type d

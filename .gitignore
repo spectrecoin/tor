@@ -235,3 +235,7 @@ uptime-*.json
 .vs/
 *.user
 autotools-cmake-convert.pl
+torapp.exe
+torapp.pdb
+torlib.lib
+torlib.pdb

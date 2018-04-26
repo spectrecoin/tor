@@ -52,7 +52,9 @@
  * And I'm not just saying that because some of our asserts check
  * security-critical properties.
  */
+#ifndef _MSC_BUILD
 #error "Sorry; we don't support building with NDEBUG."
+#endif
 #endif /* defined(NDEBUG) */
 
 /* Sometimes we don't want to use assertions during branch coverage tests; it
