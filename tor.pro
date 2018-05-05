@@ -300,8 +300,8 @@ SOURCES += \
     $$PWD/src/ext/strlcpy.c \
     $$PWD/src/ext/tinytest.c \
 #    $$PWD/src/ext/tinytest_demo.c \
-    $$PWD/src/ext/curve25519_donna/curve25519-donna-c64.c \
-#    $$PWD/src/ext/curve25519_donna/curve25519-donna.c \
+#    $$PWD/src/ext/curve25519_donna/curve25519-donna-c64.c \
+    $$PWD/src/ext/curve25519_donna/curve25519-donna.c \
     $$PWD/src/ext/ed25519/donna/fuzz/curve25519-ref10.c \
     $$PWD/src/ext/ed25519/donna/fuzz/ed25519-donna-sse2.c \
 #    $$PWD/src/ext/ed25519/donna/fuzz/ed25519-donna.c \
