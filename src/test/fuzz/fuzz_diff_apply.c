@@ -28,16 +28,20 @@ mock_consensus_digest_eq_(const uint8_t *a, const uint8_t *b)
 int
 fuzz_init(void)
 {
+#ifndef _MSC_VER
   MOCK(consensus_compute_digest, mock_consensus_compute_digest_);
   MOCK(consensus_digest_eq, mock_consensus_digest_eq_);
+#endif
   return 0;
 }
 
 int
 fuzz_cleanup(void)
 {
+#ifndef _MSC_VER
   UNMOCK(consensus_compute_digest);
   UNMOCK(consensus_digest_eq);
+#endif
   return 0;
 }
 

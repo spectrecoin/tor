@@ -28,6 +28,7 @@ int tor_main(int argc, char *argv[]);
 /** We keep main() in a separate file so that our unit tests can use
  * functions from main.c)
  */
+#ifndef NO_MAIN
 int
 main(int argc, char *argv[])
 {
@@ -37,4 +38,4 @@ main(int argc, char *argv[])
   else
     return r;
 }
-
+#endif

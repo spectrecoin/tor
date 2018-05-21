@@ -4,8 +4,7 @@ CFLAGS = /O2 /MT /I ..\win32 /I ..\..\..\build-alpha\include /I ..\common \
     /I ..\ext
 
 LIBOR_OBJECTS = address.obj backtrace.obj compat.obj container.obj di_ops.obj \
-	log.obj memarea.obj mempool.obj procmon.obj sandbox.obj util.obj \
-	util_codedigest.obj
+	log.obj memarea.obj procmon.obj sandbox.obj util.obj
 
 LIBOR_CRYPTO_OBJECTS = aes.obj crypto.obj crypto_format.obj compress.obj compress_zlib.obj \
 	tortls.obj crypto_curve25519.obj curve25519-donna.obj

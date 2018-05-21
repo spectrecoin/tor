@@ -78,6 +78,10 @@ if test "$enable_static_tor" = "yes"; then
   CFLAGS="$CFLAGS -static"
 fi
 
+    AC_DEFINE([HAVE_SSL_SESSION_GET_MASTER_KEY], 1)
+    AC_DEFINE([HAVE_SSL_GET_CLIENT_CIPHERS], 1)
+    AC_DEFINE([HAVE_SSL_GET_CLIENT_RANDOM], 1)
+    AC_DEFINE([HAVE_SSL_GET_SERVER_RANDOM], 1)
 if test "$enable_system_torrc" = "no"; then
   AC_DEFINE(DISABLE_SYSTEM_TORRC, 1,
             [Defined if we're not going to look for a torrc in SYSCONF])
@@ -723,6 +727,7 @@ AC_ARG_WITH(ssl-dir,
       fi
   ])
 
+PKG_CHECK_MODULES(OPENSSL, [openssl >= 1.1], [], [AC_MSG_ERROR([OpenSSL 1.1 not found])])
 AC_MSG_NOTICE([Now, we'll look for OpenSSL >= 1.0.1])
 TOR_SEARCH_LIBRARY(openssl, $tryssldir, [-lssl -lcrypto $TOR_LIB_GDI $TOR_LIB_WS32],
     [#include <openssl/ssl.h>],
