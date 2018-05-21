@@ -1,9 +1,11 @@
 #if defined(_WIN32)
 	#include <windows.h>
 	#include <wincrypt.h>
+#if !defined(_MSC_VER)
 	typedef unsigned int uint32_t;
 #else
 	#include <stdint.h>
+#endif
 #endif
 
 #include <string.h>

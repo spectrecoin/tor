@@ -20,16 +20,20 @@ mock_consensus_compute_digest_(const char *c, consensus_digest_t *d)
 int
 fuzz_init(void)
 {
+#ifndef _MSC_VER
   MOCK(consensus_compute_digest, mock_consensus_compute_digest_);
   MOCK(consensus_compute_digest_as_signed, mock_consensus_compute_digest_);
+#endif
   return 0;
 }
 
 int
 fuzz_cleanup(void)
 {
+#ifndef _MSC_VER
   UNMOCK(consensus_compute_digest);
   UNMOCK(consensus_compute_digest_as_signed);
+#endif
   return 0;
 }
 

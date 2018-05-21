@@ -75,21 +75,24 @@ mock_directory_handle_command_post(dir_connection_t *conn,
 int
 fuzz_init(void)
 {
+#ifndef _MSC_VER
   /* Set up fake response handler */
   MOCK(connection_write_to_buf_impl_, mock_connection_write_to_buf_impl_);
   /* Set up the fake handler functions */
   MOCK(directory_handle_command_get, mock_directory_handle_command_get);
   MOCK(directory_handle_command_post, mock_directory_handle_command_post);
-
+#endif
   return 0;
 }
 
 int
 fuzz_cleanup(void)
 {
+#ifndef _MSC_VER
   UNMOCK(connection_write_to_buf_impl_);
   UNMOCK(directory_handle_command_get);
   UNMOCK(directory_handle_command_post);
+#endif
   return 0;
 }
 

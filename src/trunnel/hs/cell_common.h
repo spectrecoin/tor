@@ -40,6 +40,7 @@ void trn_cell_extension_fields_free(trn_cell_extension_fields_t *victim);
  * if the input appears truncated, and -1 if the input is otherwise
  * invalid.
  */
+
 ssize_t trn_cell_extension_fields_parse(trn_cell_extension_fields_t **output, const uint8_t *input, const size_t len_in);
 /** Return the number of bytes we expect to need to encode the
  * trn_cell_extension_fields in 'obj'. On failure, return a negative

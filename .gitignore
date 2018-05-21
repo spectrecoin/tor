@@ -232,3 +232,10 @@ uptime-*.json
 # /src/win32/
 /src/win32/Makefile
 /src/win32/Makefile.in
+.vs/
+*.user
+autotools-cmake-convert.pl
+torapp.exe
+torapp.pdb
+torlib.lib
+torlib.pdb

@@ -33,8 +33,10 @@ int
 fuzz_init(void)
 {
   disable_signature_checking();
+#ifndef _MSC_VER
   MOCK(dump_desc, mock_dump_desc__nodump);
   MOCK(router_compute_hash_final, mock_router_produce_hash_final__nohash);
+#endif
   ed25519_init();
   return 0;
 }

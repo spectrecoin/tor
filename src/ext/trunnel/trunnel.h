@@ -11,8 +11,16 @@
 
 #ifndef TRUNNEL_H_INCLUDED_
 #define TRUNNEL_H_INCLUDED_
-
+#ifdef _MSC_VER
+#include <Windows.h>
+#include <BaseTsd.h>
+#endif
 #include <sys/types.h>
+
+#if defined(_MSC_VER)
+#include <BaseTsd.h>
+typedef SSIZE_T ssize_t;
+#endif
 
 /** Macro to declare a variable-length dynamically allocated array.  Trunnel
  * uses these to store all variable-length arrays. */

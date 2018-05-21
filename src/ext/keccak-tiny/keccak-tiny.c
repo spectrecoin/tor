@@ -12,6 +12,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#ifdef _WIN32
+#include <winsock2.h>
+#include <windows.h>
+#include <wincrypt.h>
+/* Windows defines this; so does OpenSSL 0.9.8h and later. We don't actually
+ * use either definition. */
+#undef OCSP_RESPONSE
+#endif /* defined(_WIN32) */
+
 
 /******** The Keccak-f[1600] permutation ********/
 
@@ -133,7 +142,31 @@ static inline int hash(uint8_t* out, size_t outlen,
   // Squeeze output.
   foldP(out, outlen, setout);
   setout(a, out, outlen);
+#if defined(SecureZeroMemory) || defined(HAVE_SECUREZEROMEMORY)
+  /* Here's what you do on windows. */
+  SecureZeroMemory(a, 200);
+#elif defined(HAVE_RTLSECUREZEROMEMORY)
+  RtlSecureZeroMemory(mem,sz);
+#elif defined(HAVE_EXPLICIT_BZERO)
+  /* The BSDs provide this. */
+  explicit_bzero(a, 200);
+#elif defined(HAVE_MEMSET_S)
+  /* This is in the C99 standard. */
   memset_s(a, 200, 0, 200);
+#else
+  /* This is a slow and ugly function from OpenSSL that fills 'mem' with junk
+   * based on the pointer value, then uses that junk to update a global
+   * variable.  It's an elaborate ruse to trick the compiler into not
+   * optimizing out the "wipe this memory" code.  Read it if you like zany
+   * programming tricks! In later versions of Tor, we should look for better
+   * not-optimized-out memory wiping stuff...
+   *
+   * ...or maybe not.  In practice, there are pure-asm implementations of
+   * OPENSSL_cleanse() on most platforms, which ought to do the job.
+   **/
+
+  OPENSSL_cleanse(a, 200);
+#endif /* defined(SecureZeroMemory) || defined(HAVE_SECUREZEROMEMORY) || ... */
   return 0;
 }
 

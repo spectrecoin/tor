@@ -31,7 +31,9 @@
 #include "util_format.h"
 
 #include "ed25519/ref10/ed25519_ref10.h"
+#ifndef _MSC_BUILD
 #include "ed25519/donna/ed25519_donna_tor.h"
+#endif
 
 static void pick_ed25519_impl(void);
 
@@ -84,6 +86,7 @@ static const ed25519_impl_t impl_ref10 = {
   ed25519_ref10_scalarmult_with_group_order,
 };
 
+#ifndef _MSC_VER
 /** The Ref10 Ed25519 implementation. This one is heavily optimized, but still
  * mostly C. The C still tends to be heavily platform-specific. */
 static const ed25519_impl_t impl_donna = {
@@ -104,6 +107,7 @@ static const ed25519_impl_t impl_donna = {
   ed25519_donna_pubkey_from_curve25519_pubkey,
   ed25519_donna_scalarmult_with_group_order,
 };
+#endif
 
 /** Which Ed25519 implementation are we using?  NULL if we haven't decided
  * yet. */
@@ -739,21 +743,26 @@ ed25519_impl_spot_check,(void))
 void
 ed25519_set_impl_params(int use_donna)
 {
-  if (use_donna)
+#ifdef _MSC_VER
+    ed25519_impl = &impl_ref10;
+#else
+    if (use_donna)
     ed25519_impl = &impl_donna;
   else
     ed25519_impl = &impl_ref10;
+#endif
 }
 
 /** Choose whether to use the Ed25519-donna implementation. */
 static void
 pick_ed25519_impl(void)
 {
+#ifndef _MSC_VER
   ed25519_impl = &impl_donna;
 
   if (ed25519_impl_spot_check() == 0)
     return;
-
+#endif
   /* LCOV_EXCL_START
    * unreachable unless ed25519_donna is broken */
   log_warn(LD_CRYPTO, "The Ed25519-donna implementation seems broken; using "
