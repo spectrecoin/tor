@@ -4,6 +4,13 @@
 /* Define if building universal (internal helper macro) */
 /* #undef AC_APPLE_UNIVERSAL_BUILD */
 
+
+#define HAVE_SSL_SESSION_GET_MASTER_KEY 1
+#define HAVE_SSL_GET_CLIENT_CIPHERS 1
+#define HAVE_SSL_GET_CLIENT_RANDOM 1
+#define HAVE_SSL_GET_SERVER_RANDOM 1
+
+
 /* tor's configuration directory */
 #define CONFDIR "/usr/local/etc/tor"
 
