@@ -82,6 +82,7 @@ fi
     AC_DEFINE([HAVE_SSL_GET_CLIENT_CIPHERS], 1)
     AC_DEFINE([HAVE_SSL_GET_CLIENT_RANDOM], 1)
     AC_DEFINE([HAVE_SSL_GET_SERVER_RANDOM], 1)
+
 if test "$enable_system_torrc" = "no"; then
   AC_DEFINE(DISABLE_SYSTEM_TORRC, 1,
             [Defined if we're not going to look for a torrc in SYSCONF])
@@ -227,9 +228,9 @@ dnl cross-compiling.
 if test "x$enable_tool_name_check" != "xno"; then
     if test "x$ac_tool_warned" = "xyes"; then
         AC_MSG_ERROR([We are cross compiling but could not find a properly named toolchain. Do you have your cross-compiling toolchain in PATH? (You can --disable-tool-name-check to ignore this.)])
-  elif test "x$ac_ct_AR" != "x" -a "x$cross_compiling" = "xmaybe"; then
-    AC_MSG_ERROR([We think we are cross compiling but could not find a properly named toolchain. Do you have your cross-compiling toolchain in PATH? (You can --disable-tool-name-check to ignore this.)])
-  fi
+	elif test "x$ac_ct_AR" != "x" -a "x$cross_compiling" = "xmaybe"; then
+		AC_MSG_ERROR([We think we are cross compiling but could not find a properly named toolchain. Do you have your cross-compiling toolchain in PATH? (You can --disable-tool-name-check to ignore this.)])
+	fi
 fi
 
 AC_PROG_CC
@@ -288,8 +289,8 @@ AC_CACHE_CHECK([for working C99 mid-block declaration syntax],
       tor_cv_c_c99_decl,
       [AC_COMPILE_IFELSE(
          [AC_LANG_PROGRAM([], [int x; x = 3; int y; y = 4 + x;])],
-   [tor_cv_c_c99_decl=yes],
-   [tor_cv_c_c99_decl=no] )])
+	 [tor_cv_c_c99_decl=yes],
+	 [tor_cv_c_c99_decl=no] )])
 if test "$tor_cv_c_c99_decl" != "yes"; then
   AC_MSG_ERROR([Your compiler doesn't support c99 mid-block declarations. This is required as of Tor 0.2.6.x])
 fi
@@ -298,9 +299,9 @@ AC_CACHE_CHECK([for working C99 designated initializers],
       tor_cv_c_c99_designated_init,
       [AC_COMPILE_IFELSE(
          [AC_LANG_PROGRAM([struct s { int a; int b; };],
-           [[ struct s ss = { .b = 5, .a = 6 }; ]])],
-   [tor_cv_c_c99_designated_init=yes],
-   [tor_cv_c_c99_designated_init=no] )])
+  	       [[ struct s ss = { .b = 5, .a = 6 }; ]])],
+	 [tor_cv_c_c99_designated_init=yes],
+	 [tor_cv_c_c99_designated_init=no] )])
 
 if test "$tor_cv_c_c99_designated_init" != "yes"; then
   AC_MSG_ERROR([Your compiler doesn't support c99 designated initializers. This is required as of Tor 0.2.6.x])
@@ -484,14 +485,14 @@ AM_CONDITIONAL(THREADS_PTHREADS, test "$bwin32" = "false")
 
 AC_CHECK_FUNCS(
         _NSGetEnviron \
-  RtlSecureZeroMemory \
-  SecureZeroMemory \
+	RtlSecureZeroMemory \
+	SecureZeroMemory \
         accept4 \
         backtrace \
         backtrace_symbols_fd \
-  eventfd \
-  explicit_bzero \
-  timingsafe_memcmp \
+	eventfd \
+	explicit_bzero \
+	timingsafe_memcmp \
         flock \
         ftime \
         get_current_dir_name \
@@ -501,8 +502,8 @@ AC_CHECK_FUNCS(
         getrlimit \
         gettimeofday \
         gmtime_r \
-  gnu_get_libc_version \
-  htonll \
+	gnu_get_libc_version \
+	htonll \
         inet_aton \
         ioctl \
         issetugid \
@@ -511,27 +512,27 @@ AC_CHECK_FUNCS(
         lround \
         memmem \
         memset_s \
-  pipe \
-  pipe2 \
+	pipe \
+	pipe2 \
         prctl \
-  readpassphrase \
+	readpassphrase \
         rint \
         sigaction \
         socketpair \
-  statvfs \
+	statvfs \
         strlcat \
         strlcpy \
-  strnlen \
+	strnlen \
         strptime \
         strtok_r \
         strtoull \
         sysconf \
-  sysctl \
-  truncate \
+	sysctl \
+	truncate \
         uname \
-  usleep \
+	usleep \
         vasprintf \
-  _vscprintf
+	_vscprintf
 )
 
 # Apple messed up when they added two functions functions in Sierra: they
@@ -783,13 +784,13 @@ AC_CHECK_MEMBERS([struct ssl_method_st.get_cipher_by_char], , ,
 ])
 
 AC_CHECK_FUNCS([ \
-    SSL_SESSION_get_master_key \
-    SSL_get_server_random \
+		SSL_SESSION_get_master_key \
+		SSL_get_server_random \
                 SSL_get_client_ciphers \
                 SSL_get_client_random \
-    SSL_CIPHER_find \
-    TLS_method
-         ])
+		SSL_CIPHER_find \
+		TLS_method
+	       ])
 
 dnl Check if OpenSSL has scrypt implementation.
 AC_CHECK_FUNCS([ EVP_PBE_scrypt ])
@@ -1014,32 +1015,32 @@ if test "$have_clang" = "yes"; then
       AC_LANG_SOURCE([[
           #include <stdint.h>
           #include <stdlib.h>
-    int main(int argc, char **argv)
-    {
+	  int main(int argc, char **argv)
+	  {
             int64_t x = ((int64_t)atoi(argv[1])) * (int64_t)atoi(argv[2])
-                  * (int64_t)atoi(argv[3]);
-      return x == 9;
-    } ]])],
-    [ftrapv_can_link=yes; AC_MSG_RESULT([yes])],
-    [ftrapv_can_link=no; AC_MSG_RESULT([no])])
+	                * (int64_t)atoi(argv[3]);
+	    return x == 9;
+	  } ]])],
+	  [ftrapv_can_link=yes; AC_MSG_RESULT([yes])],
+	  [ftrapv_can_link=no; AC_MSG_RESULT([no])])
   if test "$ftrapv_can_link" = "no"; then
     AC_MSG_CHECKING([whether defining __mulodi4 fixes that])
     AC_LINK_IFELSE([
       AC_LANG_SOURCE([[
           #include <stdint.h>
           #include <stdlib.h>
-    int64_t __mulodi4(int64_t a, int64_t b, int *overflow) {
+	  int64_t __mulodi4(int64_t a, int64_t b, int *overflow) {
              *overflow=0;
-       return a;
+	     return a;
           }
-    int main(int argc, char **argv)
-    {
+	  int main(int argc, char **argv)
+	  {
             int64_t x = ((int64_t)atoi(argv[1])) * (int64_t)atoi(argv[2])
-                  * (int64_t)atoi(argv[3]);
-      return x == 9;
-    } ]])],
-    [mulodi_fixes_ftrapv=yes; AC_MSG_RESULT([yes])],
-    [mulodi_fixes_ftrapv=no; AC_MSG_RESULT([no])])
+	                * (int64_t)atoi(argv[3]);
+	    return x == 9;
+	  } ]])],
+	  [mulodi_fixes_ftrapv=yes; AC_MSG_RESULT([yes])],
+	  [mulodi_fixes_ftrapv=no; AC_MSG_RESULT([no])])
   fi
   CFLAGS="$saved_CFLAGS"
 fi
@@ -1146,7 +1147,7 @@ AC_CACHE_CHECK([whether we can use curve25519-donna-c64],
       }
   ], [dnl
     int ok = func( ((uint64_t)2000000000) * 1000000000,
-               ((uint64_t)1234567890) << 24);
+    	         ((uint64_t)1234567890) << 24);
         return !ok;
       ])],
           [tor_cv_can_use_curve25519_donna_c64=cross],
@@ -1244,7 +1245,7 @@ AC_CHECK_HEADERS([assert.h \
                   sys/mman.h \
                   sys/param.h \
                   sys/prctl.h \
-      sys/random.h \
+		  sys/random.h \
                   sys/resource.h \
                   sys/select.h \
                   sys/socket.h \
@@ -2036,4 +2037,166 @@ if test "x$enable_gcc_warnings_advisory" != "xno"; then
      -Wreadonly-iboutlet-property
      -Wreadonly-setter-attrs
      -Wreceiver-expr
-     -Wreceiver-forward-c
+     -Wreceiver-forward-class
+     -Wreceiver-is-weak
+     -Wreinterpret-base-class
+     -Wrequires-super-attribute
+     -Wreserved-user-defined-literal
+     -Wreturn-stack-address
+     -Wsection
+     -Wselector-type-mismatch
+     -Wsentinel
+     -Wserialized-diagnostics
+     -Wshadow
+     -Wshift-count-negative
+     -Wshift-count-overflow
+     -Wshift-negative-value
+     -Wshift-overflow=2
+     -Wshift-sign-overflow
+     -Wshorten-64-to-32
+     -Wsizeof-array-argument
+     -Wsource-uses-openmp
+     -Wstatic-float-init
+     -Wstatic-in-inline
+     -Wstatic-local-in-inline
+     -Wstrict-overflow=1
+     -Wstring-compare
+     -Wstring-conversion
+     -Wstrlcpy-strlcat-size
+     -Wstrncat-size
+     -Wsuggest-attribute=format
+     -Wsuggest-attribute=noreturn
+     -Wsuper-class-method-mismatch
+     -Wswitch-bool
+     -Wsync-nand
+     -Wtautological-constant-out-of-range-compare
+     -Wtentative-definition-incomplete-type
+     -Wtrampolines
+     -Wtype-safety
+     -Wtypedef-redefinition
+     -Wtypename-missing
+     -Wundefined-inline
+     -Wundefined-internal
+     -Wundefined-reinterpret-cast
+     -Wunicode
+     -Wunicode-whitespace
+     -Wunknown-warning-option
+     -Wunnamed-type-template-args
+     -Wunneeded-member-function
+     -Wunsequenced
+     -Wunsupported-visibility
+     -Wunused-but-set-parameter
+     -Wunused-but-set-variable
+     -Wunused-command-line-argument
+     -Wunused-const-variable=2
+     -Wunused-exception-parameter
+     -Wunused-local-typedefs
+     -Wunused-member-function
+     -Wunused-sanitize-argument
+     -Wunused-volatile-lvalue
+     -Wuser-defined-literals
+     -Wvariadic-macros
+     -Wvector-conversion
+     -Wvector-conversions
+     -Wvexing-parse
+     -Wvisibility
+     -Wvla-extension
+     -Wzero-length-array
+  ], [ TOR_CHECK_CFLAGS([warning_flag]) ])
+
+dnl    We should re-enable this in some later version.  Clang doesn't
+dnl    mind, but it causes trouble with GCC.
+dnl     -Wstrict-overflow=2
+
+dnl    These seem to require annotations that we don't currently use,
+dnl    and they give false positives in our pthreads wrappers. (Clang 4)
+dnl     -Wthread-safety
+dnl     -Wthread-safety-analysis
+dnl     -Wthread-safety-attributes
+dnl     -Wthread-safety-beta
+dnl     -Wthread-safety-precise
+
+  CFLAGS="$CFLAGS -W -Wfloat-equal -Wundef -Wpointer-arith"
+  CFLAGS="$CFLAGS -Wstrict-prototypes -Wmissing-prototypes -Wwrite-strings"
+  CFLAGS="$CFLAGS -Wredundant-decls -Wchar-subscripts -Wcomment -Wformat=2"
+  CFLAGS="$CFLAGS -Wwrite-strings"
+  CFLAGS="$CFLAGS -Wnested-externs -Wbad-function-cast -Wswitch-enum"
+  CFLAGS="$CFLAGS -Waggregate-return -Wpacked -Wunused"
+  CFLAGS="$CFLAGS -Wunused-parameter "
+  # These interfere with building main() { return 0; }, which autoconf
+  # likes to use as its default program.
+  CFLAGS="$CFLAGS -Wold-style-definition -Wmissing-declarations"
+
+  if test "$tor_cv_cflags__Wnull_dereference" = "yes"; then
+    AC_DEFINE([HAVE_CFLAG_WNULL_DEREFERENCE], 1, [True if we have -Wnull-dereference])
+  fi
+  if test "$tor_cv_cflags__Woverlength_strings" = "yes"; then
+    AC_DEFINE([HAVE_CFLAG_WOVERLENGTH_STRINGS], 1, [True if we have -Woverlength-strings])
+  fi
+
+  if test "x$enable_fatal_warnings" = "xyes"; then
+    # I'd like to use TOR_CHECK_CFLAGS here, but I can't, since the
+    # default autoconf programs are full of errors.
+    CFLAGS="$CFLAGS -Werror"
+  fi
+
+fi
+
+if test "$enable_coverage" = "yes" && test "$have_clang" = "no"; then
+   case "$host_os" in
+    darwin*)
+      AC_MSG_WARN([Tried to enable coverage on OSX without using the clang compiler. This might not work! If coverage fails, use CC=clang when configuring with --enable-coverage.])
+   esac
+fi
+
+CPPFLAGS="$CPPFLAGS $TOR_CPPFLAGS_libevent $TOR_CPPFLAGS_openssl $TOR_CPPFLAGS_zlib"
+
+AC_CONFIG_FILES([
+        Doxyfile
+        Makefile
+        contrib/dist/suse/tor.sh
+        contrib/operator-tools/tor.logrotate
+        contrib/dist/tor.sh
+        contrib/dist/torctl
+        contrib/dist/tor.service
+        src/config/torrc.sample
+        src/config/torrc.minimal
+        src/rust/.cargo/config
+        scripts/maint/checkOptionDocs.pl
+        scripts/maint/updateVersions.pl
+])
+
+if test "x$asciidoc" = "xtrue" && test "$ASCIIDOC" = "none"; then
+  regular_mans="doc/tor doc/tor-gencert doc/tor-resolve doc/torify"
+  for file in $regular_mans ; do
+    if ! [[ -f "$srcdir/$file.1.in" ]] || ! [[ -f "$srcdir/$file.html.in" ]] ; then
+      echo "==================================";
+      echo;
+      echo "Building Tor has failed since manpages cannot be built.";
+      echo;
+      echo "You need asciidoc installed to be able to build the manpages.";
+      echo "To build without manpages, use the --disable-asciidoc argument";
+      echo "when calling configure.";
+      echo;
+      echo "==================================";
+      exit 1;
+    fi
+  done
+fi
+
+if test "$fragile_hardening" = "yes"; then
+  AC_MSG_WARN([
+
+============
+Warning!  Building Tor with --enable-fragile-hardening (also known as
+--enable-expensive-hardening) makes some kinds of attacks harder, but makes
+other kinds of attacks easier. A Tor instance build with this option will be
+somewhat less vulnerable to remote code execution, arithmetic overflow, or
+out-of-bounds read/writes... but at the cost of becoming more vulnerable to
+denial of service attacks. For more information, see
+https://trac.torproject.org/projects/tor/wiki/doc/TorFragileHardening
+============
+  ])
+fi
+
+AC_OUTPUT
